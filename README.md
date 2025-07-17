@@ -32,90 +32,64 @@ Ce projet a pour but d’apprendre :
 
 ---
 
-## 🧰 Prérequis
-
-- Linux (Debian/Ubuntu de préférence)
-- Node.js ≥ 18
-- MongoDB (local ou distant)
-- Nginx installé
-- Git, curl
-
----
-
 ## 📁 Structure du projet
 
 ```
-ilyam-revision-ai-backend/
-├── index.js              # Code principal Express
-├── files/                # Répertoire de test pour LFI
+frontend/
+├── App.jsx               # Code principal de l'application
+├── routes/               # Répertoire des composants pour les pages des failles de sécurité
+├── views/                # Répertoire des vues des failles
 └── README.md             # Ce fichier
 ```
 
 ---
 
-## ⚙️ Étape 1 – Cloner le projet
+## 🔐 Comment j'ai ajouté un certificat SSL (HTTPS avec Nginx) à mon VPS de chez Scaleway ?
 
-```bash
-git clone https://github.com/votre-utilisateur/ilyam-revision-ai-backend.git
-cd ilyam-revision-ai-backend
-```
+### 📁 A. Génération d'un certificat SSL avec Let's Encrypt & Certbot
 
----
+## 🔐 Mise en place du certificat SSL avec Let's Encrypt & Certbot
 
-## 📦 Étape 2 – Installer les dépendances Node.js
+Pour sécuriser l'application avec HTTPS, j'ai utilisé **Let's Encrypt** via **Certbot**, en mode automatique avec Nginx. Voici les étapes que j'ai suivies :
 
-```bash
-npm install
-```
+1. **Installation de Certbot et du plugin Nginx** :
+   ```bash
+   sudo apt update
+   sudo apt install certbot python3-certbot-nginx
+Vérification que Nginx fonctionne bien et que le site est accessible via HTTP (http://ilyam.revision-ai.com).
 
----
+Obtention automatique du certificat avec redirection HTTPS :
 
-## 🧪 Étape 3 – Tester le backend en local (port 3001)
+bash
+Copier
+Modifier
+sudo certbot --nginx -d ilyam.revision-ai.com
+Certbot a automatiquement :
 
-Avant toute configuration Nginx :
+généré un certificat SSL/TLS
 
-```bash
-node index.js
-```
+configuré Nginx pour rediriger le trafic HTTP vers HTTPS
 
-Par défaut, l’API écoute sur [http://localhost:3001](http://localhost:3001)
+rechargé Nginx pour appliquer les changements
 
----
+Vérification du bon fonctionnement :
 
-## 🛠️ Étape 4 – Lancer MongoDB
+Accès au site via https://ilyam.revision-ai.com
 
-Assurez-vous que MongoDB est installé et fonctionne :
+Icône de cadenas visible dans le navigateur
 
-```bash
-sudo systemctl start mongod
-```
+Renouvellement automatique :
 
-Vérifiez qu’il écoute sur le port 27017 :
+Certbot installe une tâche cron par défaut.
 
-```bash
-ss -tuln | grep 27017
-```
+Pour tester manuellement :
 
----
+bash
+Copier
+Modifier
+sudo certbot renew --dry-run
+👉 Cette méthode permet d’avoir un HTTPS gratuit, automatique et reconnu, sans configuration manuelle de certificat.
 
-## 🔐 Étape 5 – Ajouter un certificat SSL (HTTPS avec Nginx)
-
-### 📁 A. Générer un certificat SSL auto-signé
-
-```bash
-sudo mkdir -p /etc/ssl/ilyam/
-cd /etc/ssl/ilyam/
-
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-  -keyout ilyam.key -out ilyam.crt \
-  -subj "/C=FR/ST=France/L=Paris/O=Demo/OU=Web/CN=ilyam-revision-ai.com"
-```
-
-Cela génère deux fichiers :
-- `/etc/ssl/ilyam/ilyam.crt`
-- `/etc/ssl/ilyam/ilyam.key`
-
----
 
 ### 🧾 B. Configuration Nginx
 
@@ -154,18 +128,16 @@ sudo systemctl reload nginx
 
 ---
 
-## 🌐 Étape 6 – Accéder à l’API en HTTPS
+## 🌐 Vérification du certificat et du SSL (HTTPS)
 
-- Test direct :  
-  ```bash
-  curl -k https://ilyam-revision-ai.com/login
-  ```
-
-- Attention : l’option `-k` est nécessaire car le certificat est auto-signé.
+- Visite du site https://ilyam-revision-ai.com
+- Vérifier si le cadenas est bien fermé
 
 ---
 
-## 🔎 Étape 7 – Test des failles
+## 🔎 Test des failles avec interface 
+
+- Visiter le site  https://ilyam-revision-ai.com afin de tester les différentes failles
 
 ### 🧨 NoSQL Injection
 
@@ -234,19 +206,6 @@ Exemple de manipulation typique :
   { "username": "alice", "password": "password1" },
   { "username": "bob", "password": "password2" }
 ]
-```
-
----
-
-## 🚀 Déploiement permanent
-
-Utilisez `pm2` pour exécuter le backend de manière persistante :
-
-```bash
-npm install -g pm2
-pm2 start index.js --name ilyam-backend
-pm2 save
-pm2 startup
 ```
 
 ---
