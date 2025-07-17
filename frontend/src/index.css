@@ -1,0 +1,231 @@
+:root {
+  --color-bg: #f7fafc;
+  --color-bg-light: #fff;
+  --color-text: #222;
+  --color-primary: #3182ce;
+  --color-primary-hover: #2563eb;
+  --color-success: #38a169;
+  --color-error: #e53e3e;
+  --color-border: #bcdffb;
+
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 700px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  padding: 0.6em 1.2em;
+  border: 1px solid var(--color-border);
+  background-color: #e3f2fd;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.tabs button:hover {
+  background-color: var(--color-primary-hover);
+  color: #fff;
+}
+
+.tabs button.active {
+  background-color: var(--color-primary);
+  color: #fff;
+  cursor: default;
+}
+
+.card {
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(49,130,206,0.08);
+}
+
+.card h3, .card h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+textarea, input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  color: var(--color-text);
+  font-size: 1em;
+  margin-bottom: 15px;
+  transition: border-color var(--transition-speed);
+  font-family: var(--font-family);
+}
+
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+button {
+  background-color: var(--color-primary);
+  border: none;
+  color: #fff;
+  padding: 0.6em 1.4em;
+  font-weight: 700;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  user-select: none;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+button:disabled {
+  background-color: #cbd5e1;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.result {
+  background-color: #f1f5f9;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  font-family: monospace;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+  color: #222;
+  user-select: text;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.login-message {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.login-message.success {
+  color: var(--color-success);
+}
+
+.login-message.error {
+  color: var(--color-error);
+}
+
+.token-box {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f1f5f9;
+  border-radius: var(--border-radius);
+  font-family: monospace;
+  word-break: break-word;
+  color: #2563eb;
+}
+
+.explanation-card {
+    background: #fffde7;
+  color: #3e2723;
+  border: 1.5px solid #ffe082;
+  box-shadow: 0 4px 24px 0 rgba(255, 193, 7, 0.18), 0 1.5px 4px 0 rgba(0,0,0,0.08);
+  border-radius: 18px;
+  padding: 28px 28px 22px 28px;
+  margin-bottom: 32px;
+  font-size: 1.13em;
+  position: relative;
+  transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.explanation-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(255, 193, 7, 0.28), 0 2px 8px 0 rgba(0,0,0,0.10);
+}
+.explanation-card h3 {
+  color: #ff9800;
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-size: 1.32em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.explanation-card strong {
+  color: #6d4c41;
+  font-weight: 700;
+}
+.explanation-card code {
+  background: #fff3e0;
+  color: #bf360c;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.98em;
+}
+.explanation-card .danger {
+  color: #d84315;
+  font-weight: 700;
+  background: #ffebee;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.explanation-card .info {
+  color: #1565c0;
+  font-weight: 700;
+  background: #e3f2fd;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  .container {
+    max-width: 100%;
+  }
+  .explanation-card {
+    padding: 14px 8px 12px 8px;
+    font-size: 1em;
+  }
+}

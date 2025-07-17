@@ -1,0 +1,193 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background: #f7fafc;
+  color: #222;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+  filter: drop-shadow(0 0 1em #90cdf4);
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #3182ce);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #63b3ed);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(49, 130, 206, 0.08);
+  margin: 1em auto;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 2em;
+}
+.tabs button {
+  background: #e3f2fd;
+  color: #222;
+  border: 1px solid #90cdf4;
+  border-radius: 8px 8px 0 0;
+  padding: 0.75em 1.5em;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.tabs button.active, .tabs button:focus {
+  background: #3182ce;
+  color: #fff;
+  outline: none;
+}
+
+.read-the-docs {
+  color: #3182ce;
+}
+
+.flex-row.main-content {
+  display: flex;
+  flex-direction: row;
+  gap: 3.5rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 2.5rem;
+  padding: 0 1rem;
+}
+
+.explanation-col {
+  flex: 1 1 350px;
+  max-width: 420px;
+  min-width: 260px;
+  position: sticky;
+  top: 2.5rem;
+  align-self: flex-start;
+}
+
+.vuln-col {
+  flex: 2 1 520px;
+  min-width: 340px;
+  max-width: 700px;
+}
+
+.floating-card {
+  background: linear-gradient(135deg, #fffde7 80%, #e3f2fd 100%);
+  color: #3e2723;
+  border: 1.5px solid #ffe082;
+  box-shadow: 0 6px 32px 0 rgba(49, 130, 206, 0.10), 0 2px 8px 0 rgba(255, 193, 7, 0.10);
+  border-radius: 22px;
+  padding: 32px 32px 26px 32px;
+  margin-bottom: 36px;
+  font-size: 1.15em;
+  position: relative;
+  transition: box-shadow 0.2s, background 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+.floating-card h3 {
+  color: #ff9800;
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: 1.35em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.floating-card strong {
+  color: #1565c0;
+  font-weight: 700;
+}
+.floating-card code {
+  background: #fff3e0;
+  color: #bf360c;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.98em;
+}
+.floating-card .danger {
+  color: #d84315;
+  font-weight: 700;
+  background: #ffebee;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.floating-card .info {
+  color: #1565c0;
+  font-weight: 700;
+  background: #e3f2fd;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.floating-card ul {
+  margin: 0 0 0 1.2em;
+  padding: 0;
+  list-style: disc inside;
+}
+.floating-card li {
+  margin-bottom: 0.5em;
+}
+
+.card.main-card {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 0 6px 32px 0 rgba(49, 130, 206, 0.10), 0 2px 8px 0 rgba(49,130,206,0.08);
+  border-radius: 18px;
+  padding: 32px 32px 26px 32px;
+}
+
+@media (max-width: 1100px) {
+  .flex-row.main-content {
+    gap: 1.5rem;
+  }
+  .explanation-col {
+    max-width: 100%;
+  }
+  .vuln-col {
+    max-width: 100%;
+  }
+}
+@media (max-width: 900px) {
+  .flex-row.main-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0;
+  }
+  .explanation-col, .vuln-col {
+    max-width: 100%;
+    min-width: 0;
+    position: static;
+  }
+  .floating-card, .card.main-card {
+    padding: 18px 8px 14px 8px;
+    font-size: 1em;
+  }
+}

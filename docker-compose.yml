@@ -1,0 +1,49 @@
+  version: '3.8'
+
+  services:
+    backend:
+      build: ./backend
+      container_name: https-server-backend
+      networks:
+        - https-network
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.backend.rule=Host(`api.bob-https.duckdns.org`)"
+        - "traefik.http.routers.backend.entrypoints=websecure"
+        - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
+        - "traefik.http.services.backend.loadbalancer.server.port=3001"
+
+    frontend:
+      build: ./frontend
+      container_name: https-server-frontend
+      depends_on:
+        - backend
+      networks:
+        - https-network
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.frontend.rule=Host(`bob-https.duckdns.org`)"
+        - "traefik.http.routers.frontend.entrypoints=websecure"
+        - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+        - "traefik.http.services.frontend.loadbalancer.server.port=80"
+
+    traefik:
+      image: traefik:v2.11
+      container_name: traefik
+      restart: unless-stopped
+      command:
+        - "--configFile=/etc/traefik/traefik.yml"
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+        - ./traefik/traefik_dynamic.yml:/etc/traefik/traefik_dynamic.yml:ro
+        - ./traefik/acme.json:/letsencrypt/acme.json
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+      networks:
+        - https-network
+
+  networks:
+    https-network:
+      driver: bridge
